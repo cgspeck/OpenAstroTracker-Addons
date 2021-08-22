@@ -7,6 +7,8 @@ difference() {
         for (i=hole_xyz_pts) {
             translate(i) HexNutHolderShim();
         }
+        translate([33, 15, 0.2]) cube([31,22,10]);
+        translate([30, 15, 0.2]) cube([38,22,1]);
     }
 
     for (i=hole_xyz_pts) {
