@@ -8,8 +8,8 @@ difference() {
         import("./STL/LCD_Case_back.STL", convexity=10);
         for (i=hole_xyz_pts) {
             translate([
-                i.x,
-                i.y,
+                i.x + 0.45,
+                i.y + 0.35,
                 model_z_error
             ]) HexNutHolderShim();
         }
@@ -18,7 +18,11 @@ difference() {
     }
 
     for (i=hole_xyz_pts) {
-        translate(i) HexNutWithHole();
+        translate([
+            i.x + 0.45,
+            i.y + 0.35,
+            i.z
+        ]) HexNutWithHole();
     }
 
     translate([
