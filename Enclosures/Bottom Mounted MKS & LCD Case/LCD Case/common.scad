@@ -5,6 +5,13 @@ clearance_loose=0.4;
 de_minimus=0.1;
 
 z_off=11;
+
+lcd_enclosure_base_dim = [
+    96,
+    73,
+    21.7
+];
+
 hole_xyz_pts=[
     [22.0, 4.0, z_off],
     [74.1, 4.0, z_off],
@@ -27,7 +34,7 @@ module CounterSunkScrew(screw_dia, screw_len, screw_cs_len, screw_cs_head_w) {
     actual_screw_dia=screw_dia + (clearance_tight * 2);
     cylinder_outer(screw_len, actual_screw_dia / 2);
     translate([0, 0, screw_len]) cone_outer(screw_cs_len, actual_screw_dia / 2, screw_cs_head_w /2);
-    translate([0, 0, screw_len + screw_cs_len]) cylinder_outer(screw_len * 2, screw_cs_head_w / 2);;
+    translate([0, 0, screw_len + screw_cs_len]) cylinder_outer(screw_len * 3, screw_cs_head_w / 2);;
 }
 
 module 3mmCounterSunkScrew(screw_len) {
