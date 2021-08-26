@@ -9,6 +9,16 @@ difference() {
     for (i=hole_xyz_pts) {
         translate(i) CSCScrewHole();
     }
+
+    translate([
+        55,
+        -de_minimus,
+        16.5
+    ]) cube([
+        13,
+        80,
+        10
+    ]);
 }
 
 module CSCScrewHole() {

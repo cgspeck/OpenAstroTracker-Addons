@@ -3,48 +3,51 @@ include <common.scad>
 
 model_z_error=0.2;
 
-difference() {
-    union() {
-        import("./STL/LCD_Case_back.STL", convexity=10);
+module LCDCaseBack() {
+    difference() {
+        union() {
+            import("./STL/LCD_Case_back.STL", convexity=10);
+            for (i=hole_xyz_pts) {
+                translate([
+                    i.x + 0.45,
+                    i.y + 0.35,
+                    model_z_error
+                ]) HexNutHolderShim();
+            }
+            translate([33, 15, model_z_error]) cube([31,25,11]);
+            translate([30, 15, model_z_error]) cube([38,22,1]);
+        }
+
         for (i=hole_xyz_pts) {
             translate([
                 i.x + 0.45,
                 i.y + 0.35,
-                model_z_error
-            ]) HexNutHolderShim();
+                i.z
+            ]) HexNutWithHole();
         }
-        translate([33, 15, model_z_error]) cube([31,25,11]);
-        translate([30, 15, model_z_error]) cube([38,22,1]);
-    }
 
-    for (i=hole_xyz_pts) {
         translate([
-            i.x + 0.45,
-            i.y + 0.35,
-            i.z
-        ]) HexNutWithHole();
+            lcd_enclosure_base_dim.x / 2,
+            lcd_enclosure_base_dim.y - 15,
+            model_z_error
+        ]) CSCPair(1.2);
+
+        translate([
+            lcd_enclosure_base_dim.x / 2,
+            20,
+            model_z_error
+        ]) CSCPair(3);
+
+        translate([
+            lcd_enclosure_base_dim.x / 2,
+            lcd_enclosure_base_dim.y / 2,
+            model_z_error
+        ]) CSCPair(3);
+
+        BottomCurveProfile();
     }
-
-    translate([
-        lcd_enclosure_base_dim.x / 2,
-        lcd_enclosure_base_dim.y - 15,
-        model_z_error
-    ]) CSCPair(1.2);
-
-    translate([
-        lcd_enclosure_base_dim.x / 2,
-        20,
-        model_z_error
-    ]) CSCPair(3);
-
-    translate([
-        lcd_enclosure_base_dim.x / 2,
-        lcd_enclosure_base_dim.y / 2,
-        model_z_error
-    ]) CSCPair(3);
-
-    BottomCurveProfile();
 }
+
 
 
 module HexNutHolderShim() {
@@ -98,3 +101,5 @@ module BottomCurveProfile(length=90) {
         ]);
     }
 }
+
+LCDCaseBack();
