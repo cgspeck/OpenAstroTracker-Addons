@@ -120,7 +120,7 @@ module LCDCase() {
 module MountSheathSolid() {
     outer_dim=[50,40,30];
     wedge_dim=[
-        25, 15, 30
+        25, 15, 60
     ];
     thickness=1.2;
     shrug=1.2;
@@ -144,9 +144,9 @@ module MountSheathSolid() {
         // rear section
         translate([
             0,
-            outer_dim.y / 2 + 7.5,
+            outer_dim.y / 2 + 17.5,
             0
-        ]) cube([50, 15, wedge_dim.z + 5], center=true);
+        ]) cube([50, 35, wedge_dim.z + 5], center=true);
 
         rotate(lcd_case_rotation) translate([
             0,
@@ -198,14 +198,16 @@ module MountSheathSolid() {
 
 module ElongatedNutHole() {
     max_z=30;
+    nut_hole_start_z=12.7;
     translate([
         0,
         0,
         -max_z/2
     ]) {
         cylinder_outer(max_z, 1.5 + clearance_tight);
-        cylinder_outer(15, 3);
-        translate([0,0,15-de_minimus]) nutHole(3);
+        cylinder_outer(12, 3.5);
+        translate([0,0,nut_hole_start_z]) nutHole(3);
+        translate([0,0,nut_hole_start_z-1.9]) nutHole(3);
     }
 
 }
@@ -240,8 +242,8 @@ mount_sheath_tran = [
     15
 ];
 
-Lid();
+// Lid();
 
-// translate([0, 0, 10]) {
-//     MountSheath();
-// }
+translate([0, 0, 10]) {
+    MountSheath();
+}
